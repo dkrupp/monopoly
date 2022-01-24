@@ -1,0 +1,13 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.board {
+  display: grid;
+  grid-template-columns: 125px repeat(9, 80px) 125px;
+  grid-template-rows: 125px repeat(9, 80px) 125px;
+  grid-gap: 2px;
+  margin: 50px auto;
+  width: 994px;
+  height: 994px;
+  background: #080808;
+  border: 2px solid #080808;
+}

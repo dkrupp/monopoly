@@ -1,0 +1,127 @@
+.corner .container {
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}
+.corner .name {
+  padding: 0;
+}
+
+.go {
+  grid-column: 11;
+  grid-row: 11 / 12;
+  position: relative;
+}
+.go .container {
+  justify-content: flex-start;
+  transform: rotate(315deg);
+}
+.go .instructions {
+  padding: 0 30px;
+}
+.go .go-word {
+  font-size: 60px;
+  color: #f50c2b;
+}
+.go .arrow {
+  font-size: 45px;
+  color: #f50c2b;
+  position: absolute;
+  bottom: -10px;
+  left: 5px;
+}
+
+.jail {
+  grid-column: 1;
+  grid-row: 11 / 12;
+  display: grid;
+  grid-template-columns: repeat(10, 12.5px);
+  grid-template-rows: repeat(10, 12.5px);
+  justify-content: center;
+  align-items: center;
+}
+.jail .drawing {
+  grid-column: 4 / 11;
+  grid-row: 1 / 8;
+  width: 87.5px;
+  height: 87.5px;
+  background: #fa811d;
+  border-bottom: 2px solid #080808;
+  border-left: 2px solid #080808;
+}
+.jail .just {
+  grid-column: 3;
+  grid-row: 4;
+  transform: rotate(90deg);
+  padding-top: 5px;
+}
+.jail .visiting {
+  grid-column: 6;
+  grid-row: 8;
+  padding-top: 5px;
+}
+.jail .container {
+  align-items: center;
+  transform: rotate(45deg);
+}
+.jail .name {
+  font-size: 14px;
+}
+.jail .window {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  width: 55px;
+  height: 55px;
+  background: #fafaf8;
+  border: 2px solid #080808;
+}
+.jail .person {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 40px;
+}
+.jail .bar {
+  height: 55px;
+  width: 2px;
+  background: #080808;
+}
+
+.free-parking {
+  grid-column: 1;
+  grid-row: 1 / 2;
+}
+.free-parking .container {
+  justify-content: center;
+  transform: rotate(135deg);
+}
+.free-parking .name {
+  font-size: 16px;
+}
+.free-parking .drawing {
+  font-size: 60px;
+  color: #f50c2b;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.go-to-jail {
+  grid-column: 11;
+  grid-row: 1 / 1;
+}
+.go-to-jail .container {
+  justify-content: center;
+  transform: rotate(225deg);
+}
+.go-to-jail .name {
+  font-size: 16px;
+}
+.go-to-jail .drawing {
+  font-size: 60px;
+  color: #640303;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
