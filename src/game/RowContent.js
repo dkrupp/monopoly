@@ -1,4 +1,9 @@
-export const bottomRowSpaces = [
+export const size = 9;
+
+export const fields = [
+  // bottom right
+  { type: 'go', name: 'GO' },
+  // bottom
   {
     type: 'property',
     color: 'light-blue',
@@ -51,9 +56,9 @@ export const bottomRowSpaces = [
     name: 'Mediter-ranean Avenue',
     price: '50',
   },
-];
-
-export const leftRowSpaces = [
+  // bottom left
+  { type: 'jail', name: 'Jail' },
+  // left
   {
     type: 'property',
     color: 'orange',
@@ -108,9 +113,9 @@ export const leftRowSpaces = [
     name: 'St. Charles Place',
     price: 140,
   },
-];
-
-export const topRowSpaces = [
+  // top left
+  { type: 'free-parking', name: 'Free Parking' },
+  // top
   {
     type: 'property',
     color: 'red',
@@ -164,9 +169,9 @@ export const topRowSpaces = [
     name: 'Marvin Gardens',
     price: 280,
   },
-];
-
-export const rightRowSpaces = [
+  // top right
+  { type: 'go-to-jail', name: 'Go To Jail' },
+  // right
   {
     type: 'property',
     color: 'green',

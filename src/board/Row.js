@@ -20,6 +20,8 @@ export function Row({ ctx, G, moves, options: { type, spaces } }) {
     default:
   }
   return (
-    <div className={className}>{spaces.map((s) => Space({ options: s }))}</div>
+    <div className={className}>
+      {spaces.map((s, index) => Space({ options: s, id: `${type}-${index}` }))}
+    </div>
   );
 }

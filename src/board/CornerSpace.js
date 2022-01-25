@@ -8,10 +8,10 @@ export function CornerSpace({
   options: { type, color, name, price, instructions, drawing },
 }) {
   return (
-    <div class={`space corner ${type}`}>
-      <div class="container">
-        <div class="name">{name}</div>
-        {drawing ? <i class={`drawing fa fa-${drawing}`}></i> : ''}
+    <div className={`space corner ${type}`}>
+      <div className="container">
+        <div className="name">{name}</div>
+        {drawing ? <i className={`drawing fa fa-${drawing}`}></i> : ''}
       </div>
     </div>
   );

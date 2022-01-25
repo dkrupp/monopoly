@@ -1,40 +1,33 @@
 import { INVALID_MOVE } from 'boardgame.io/core';
 
-// Return true if `cells` is in a winning configuration.
+import { fields } from './game/RowContent';
+
 function IsVictory(cells) {
-  const positions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  const isRowComplete = (row) => {
-    const symbols = row.map((i) => cells[i]);
-    return symbols.every((i) => i !== null && i === symbols[0]);
-  };
-
-  return positions.map(isRowComplete).some((i) => i === true);
+  return false;
 }
 
 // Return true if all `cells` are occupied.
 function IsDraw(cells) {
-  return cells.filter((c) => c === null).length === 0;
+  return false;
 }
 
-export const TicTacToe = {
-  setup: (ctx) => ({ cells: Array(9).fill(null) }),
+export const Monopoly = {
+  setup: (ctx, G) => ({
+    player: {
+      0: { index: 0, field: fields[0] },
+      1: { index: 0, field: fields[0] },
+    },
+  }),
 
   moves: {
-    clickCell: (G, ctx, id) => {
-      if (G.cells[id] !== null) {
-        return INVALID_MOVE;
+    throwDice: (G, ctx) => {
+      G.dieRoll = ctx.random.D6();
+      G.player[ctx.currentPlayer].index += G.dieRoll;
+      if (G.player[ctx.currentPlayer].index >= fields.length) {
+        G.player[ctx.currentPlayer].index -= fields.length;
       }
-      G.cells[id] = ctx.currentPlayer;
+      G.player[ctx.currentPlayer].field =
+        fields[G.player[ctx.currentPlayer].index];
     },
   },
 

@@ -5,15 +5,16 @@ export function Space({
   G,
   moves,
   options: { type, color, name, price, instructions, drawing },
+  id,
 }) {
   return (
-    <div class={`space ${type}`}>
-      <div class="container">
+    <div key={id} className={`space ${type}`}>
+      <div className="container">
         {color ? <div className={`color-bar ${color}`}></div> : ''}
-        <div class="name">{name}</div>
+        <div className="name">{name}</div>
         {drawing ? <i className={`drawing fa fa-${drawing}`}></i> : ''}
-        {price ? <div class="price">PRICE ${price}</div> : ''}
-        {instructions ? <div class="instructions">{instructions}</div> : ''}
+        {price ? <div className="price">PRICE ${price}</div> : ''}
+        {instructions ? <div className="instructions">{instructions}</div> : ''}
       </div>
     </div>
   );
