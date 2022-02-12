@@ -1,4 +1,4 @@
-import { INVALID_MOVE } from 'boardgame.io/core';
+import { fields } from './game/RowContent';
 
 function IsVictory(cells) {
   return false;
