@@ -1,3 +1,5 @@
+import { CONSTANTS } from '../constants.js';
+
 export const size = 9;
 
 export class BoardFields {
@@ -15,39 +17,39 @@ export class BoardFields {
       description: 'Hány gyermeket vállalsz?',
       action: (ctx, G, moves) => {
         console.log('Kezdoallapot. Segelyen vagy.');
-        this.moves.setPlayerState('work', 'segely');
+        this.moves.setWorkType(CONSTANTS.workTypes.aid);
       },
       choices: [
         {
-          txt: 'Egyet sem',
-          fn: () => {
-            this.moves.setPlayerState('children', '0');
-            this.moves.setPlayerState('lakasrezsi', 'fizetetlen');
-            this.moves.setPlayerState('lakasbiztositas', 'fizetetlen');
+          text: 'Egyet sem',
+          action: () => {
+            this.moves.setChildren(0);
+            this.moves.setCost(CONSTANTS.costs.expenses, CONSTANTS.notpaid);
+            this.moves.setCost(CONSTANTS.costs.insurance, CONSTANTS.notpaid);
           },
         },
         {
-          txt: 'Egyet',
-          fn: () => {
-            this.moves.setPlayerState('children', '1');
-            this.moves.setPlayerState('lakasrezsi', 'fizetetlen');
-            this.moves.setPlayerState('lakasbiztositas', 'fizetetlen');
+          text: 'Egyet',
+          action: () => {
+            this.moves.setChildren(1);
+            this.moves.setCost(CONSTANTS.costs.expenses, CONSTANTS.notpaid);
+            this.moves.setCost(CONSTANTS.costs.insurance, CONSTANTS.notpaid);
           },
         },
         {
-          txt: 'Kettőt',
-          fn: () => {
-            this.moves.setPlayerState('children', '2');
-            this.moves.setPlayerState('lakasrezsi', 'fizetetlen');
-            this.moves.setPlayerState('lakasbiztositas', 'fizetetlen');
+          text: 'Kettőt',
+          action: () => {
+            this.moves.setChildren(2);
+            this.moves.setCost(CONSTANTS.costs.expenses, CONSTANTS.notpaid);
+            this.moves.setCost(CONSTANTS.costs.insurance, CONSTANTS.notpaid);
           },
         },
         {
-          txt: 'Hármat',
-          fn: () => {
-            this.moves.setPlayerState('children', '3');
-            this.moves.setPlayerState('lakasrezsi', 'fizetetlen');
-            this.moves.setPlayerState('lakasbiztositas', 'fizetetlen');
+          text: 'Hármat',
+          action: () => {
+            this.moves.setChildren(3);
+            this.moves.setCost(CONSTANTS.costs.expenses, CONSTANTS.notpaid);
+            this.moves.setCost(CONSTANTS.costs.insurance, CONSTANTS.notpaid);
           },
         },
       ],
@@ -61,7 +63,7 @@ export class BoardFields {
         'Segély helyett hetente munkabért kap: (14.000 Ft/16.500 Ft/ 21.000 Ft/21.000 Ft).',
       action: (ctx, G, moves) => {
         console.log('Executing Hetfo action');
-        this.moves.setPlayerState('work', 'kozmunka');
+        this.moves.setWorkType(CONSTANTS.workTypes.community);
       },
       choices: [],
     },
@@ -77,17 +79,17 @@ export class BoardFields {
       //fixme: nincs benne, hogy gyerekes kozmunkas nem vallalhatja
       choices: [
         {
-          txt: 'Legálisan',
-          fn: () => {
+          text: 'Legálisan',
+          action: () => {
             console.log('legalisat valasztotta');
-            this.moves.setPlayerState('work', 'legalismunka');
+            this.moves.setWorkType(CONSTANTS.workTypes.normal);
           },
         },
         {
-          txt: 'Illegálisan',
-          fn: () => {
+          text: 'Illegálisan',
+          action: () => {
             console.log('illegalisat valasztotta');
-            this.moves.setPlayerState('work', 'illegalismunka');
+            this.moves.setWorkType(CONSTANTS.workTypes.undeclared);
           },
         },
       ],
@@ -99,8 +101,9 @@ export class BoardFields {
         'Az édesanya teje elapadt a rossz életkörül- mények miatt. A tápszer ára egy hónapra: 11.000 Ft. (KÖTELEZŐ)',
       drawing: 'question',
       action: (ctx, G, moves) => {
-        if (parseInt(G.player[ctx.currentPlayer].state['children']) > 0)
+        if (G.player[ctx.currentPlayer].state.children > 0) {
           moves.addMoney(-11000);
+        }
       },
       choices: [],
     },
@@ -114,16 +117,15 @@ export class BoardFields {
       },
       choices: [
         {
-          txt: 'Lefizetem a rendőrt!',
-          fn: () => {
+          text: 'Lefizetem a rendőrt!',
+          action: () => {
             this.moves.addMoney(-5000);
-            this.moves.setPlayerState('rendorcsekk', 0);
           },
         },
         {
-          txt: 'Kérem a csekket',
-          fn: () => {
-            this.moves.setPlayerState('rendorcsekk', 1);
+          text: 'Kérem a csekket',
+          action: () => {
+            this.moves.addPenalty(1);
           },
         },
       ],
@@ -357,7 +359,7 @@ export const fields = [
       'Segély helyett hetente munkabért kap: (14.000 Ft/16.500 Ft/ 21.000 Ft/21.000 Ft).',
     action: (ctx, G, moves) => {
       console.log('Executing Hetfo action');
-      moves.setPlayerState('work', 'kozmunka');
+      moves.setWorkType(CONSTANTS.workTypes.community);
     },
     choices: [],
   },
@@ -372,17 +374,17 @@ export const fields = [
     },
     choices: [
       {
-        txt: 'Legálisan',
-        fn: () => {
+        text: 'Legálisan',
+        action: () => {
           console.log('legalisat valasztotta');
-          this.moves.setPlayerState('work', 'legalismunka');
+          this.moves.setWorkType(CONSTANTS.workTypes.normal);
         },
       },
       {
-        txt: 'Illegálisan',
-        fn: () => {
+        text: 'Illegálisan',
+        action: () => {
           console.log('illegalisat valasztotta');
-          this.moves.setPlayerState('work', 'illegalismunka');
+          this.moves.setWorkType(CONSTANTS.workTypes.undeclared);
         },
       },
     ],

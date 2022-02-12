@@ -1,3 +1,5 @@
+import { CONSTANTS } from './constants.js';
+
 function IsVictory(cells) {
   return false;
 }
@@ -10,26 +12,42 @@ function IsDraw(cells) {
 export const Monopoly = {
   setup: (ctx, G) => ({
     player: {
-      0: { index: 0, state: { money: 0, child: 0, work: 'segely' } },
+      0: {
+        index: 0,
+        state: {
+          money: 0,
+          child: 0,
+          penalty: 0,
+          work: CONSTANTS.workTypes.aid,
+          costs: {
+            [CONSTANTS.costs.expenses]: CONSTANTS.notpaid,
+            [CONSTANTS.costs.insurance]: CONSTANTS.notpaid,
+          },
+        },
+      },
     },
   }),
 
   moves: {
     throwDice: (G, ctx) => {
-      G.dieRoll = ctx.random.D6();
-      G.dieRoll = 1;
-      G.player[ctx.currentPlayer].index += G.dieRoll;
-    },
-    setPlayerState(G, ctx, nm, val) {
-      console.log(nm);
-      console.log('Setting ' + nm + ' state to ' + val);
-      G.player[ctx.currentPlayer].state[nm] = val;
-    },
-    getPlayerState(G, ctx, nm) {
-      return G.player[ctx.currentPlayer].state[nm];
+      G.diceRoll = ctx.random.D6();
+      G.diceRoll = 1;
+      G.player[ctx.currentPlayer].index += G.diceRoll;
     },
     addMoney(G, ctx, amount) {
-      G.player[ctx.currentPlayer].state['money'] += amount;
+      G.player[ctx.currentPlayer].state.money += amount;
+    },
+    setChildren(G, ctx, amount) {
+      G.player[ctx.currentPlayer].state.child = amount;
+    },
+    setCost(G, ctx, costType, state) {
+      G.player[ctx.currentPlayer].state.costs[costType] = state;
+    },
+    setWorkType(G, ctx, workType) {
+      G.player[ctx.currentPlayer].state.work = workType;
+    },
+    addPenalty(G, ctx, ammount) {
+      G.player[ctx.currentPlayer].state.penalty += ammount;
     },
   },
 

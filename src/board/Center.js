@@ -14,8 +14,8 @@ class Choices extends Component {
         aria-label="outlined primary button group"
       >
         {this.props.choices.map((question, index) => (
-          <Button key={index} onClick={question.fn}>
-            {question.txt}
+          <Button key={index} onClick={question.action}>
+            {question.text}
           </Button>
         ))}
       </ButtonGroup>
@@ -48,7 +48,7 @@ export function Center(ctx, G, moves, bf) {
     <div className="center">
       <div className="dice-box">
         <div className="x" onClick={() => onClick({ ctx, G, moves })}>
-          {G.dieRoll}
+          {G.diceRoll}
         </div>
         <div className="currentPlayer">Current Player: {ctx.currentPlayer}</div>
         <div className="currentPlayer">
