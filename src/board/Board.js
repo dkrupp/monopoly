@@ -10,17 +10,6 @@ import { fields, size } from '../game/RowContent';
 
 export function MonopolyBoard({ ctx, G, moves }) {
   const gameParams = { ctx, G, moves };
-  const onClick = (id) => moves.clickCell(id);
-
-  let winner = '';
-  if (ctx.gameover) {
-    winner =
-      ctx.gameover.winner !== undefined ? (
-        <div id="winner">Winner: {ctx.gameover.winner}</div>
-      ) : (
-        <div id="winner">Draw!</div>
-      );
-  }
 
   let current = 0;
   const bottomRight = fields[current];
