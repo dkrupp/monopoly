@@ -6,32 +6,34 @@ import { Center } from './Center';
 
 import './Board.css';
 
-import { fields, size } from '../game/RowContent';
+//import { fields, size } from '../game/RowContent';
+import { BoardFields, size } from '../game/RowContent';
 
 export function MonopolyBoard({ ctx, G, moves }) {
   const gameParams = { ctx, G, moves };
+  let bf = new BoardFields(ctx,G,moves);
 
   let current = 0;
-  const bottomRight = fields[current];
+  const bottomRight = bf.fields[current];
   current += 1;
-  const bottomRowSpaces = fields.slice(current, current + size);
+  const bottomRowSpaces = bf.fields.slice(current, current + size);
   current += size;
-  const bottomLeft = fields[current];
+  const bottomLeft = bf.fields[current];
   current += 1;
-  const leftRowSpaces = fields.slice(current, current + size);
+  const leftRowSpaces = bf.fields.slice(current, current + size);
   current += size;
-  const topLeft = fields[current];
+  const topLeft = bf.fields[current];
   current += 1;
-  const topRowSpaces = fields.slice(current, current + size);
+  const topRowSpaces = bf.fields.slice(current, current + size);
   current += size;
-  const topRight = fields[current];
+  const topRight = bf.fields[current];
   current += 1;
-  const rightRowSpaces = fields.slice(current, current + size);
+  const rightRowSpaces = bf.fields.slice(current, current + size);
 
   return (
     <div className="table">
       <div className="board">
-        {Center({ ...gameParams })}
+        {Center(ctx,G, moves, bf)}
         {CornerSpace({ options: bottomRight })}
         {Row({
           ...gameParams,
