@@ -14,6 +14,7 @@ export const Monopoly = {
     player: {
       0: {
         index: 0,
+        phase: 'start',
         state: {
           money: 0,
           child: 0,
@@ -33,6 +34,15 @@ export const Monopoly = {
       G.diceRoll = ctx.random.D6();
       G.diceRoll = 1;
       G.player[ctx.currentPlayer].index += G.diceRoll;
+      G.player[ctx.currentPlayer].phase = 'start';
+    },
+    setPhase(G, ctx, val) {
+      G.player[ctx.currentPlayer].phase = val;
+    },
+    setPlayerState(G, ctx, nm, val) {
+      console.log(nm);
+      console.log('Setting ' + nm + ' state to ' + val);
+      G.player[ctx.currentPlayer].state[nm] = val;
     },
     addMoney(G, ctx, amount) {
       G.player[ctx.currentPlayer].state.money += amount;

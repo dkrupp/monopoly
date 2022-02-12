@@ -10,8 +10,8 @@ export class Choices extends Component {
         aria-label="outlined primary button group"
       >
         {this.props.choices.map((question, index) => (
-          <Button key={index} onClick={question.action}>
-            {question.text}
+          <Button key={index} onClick={question.fn}>
+            {question.txt}
           </Button>
         ))}
       </ButtonGroup>

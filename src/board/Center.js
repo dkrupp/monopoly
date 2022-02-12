@@ -5,15 +5,22 @@ import { FieldBox } from './FieldBox.js';
 
 export function Center(ctx, G, moves, boardFields) {
   const onClick = function ({ ctx, G, moves }) {
+    console.log('throwing with dice');
     moves.throwDice();
-    console.log('throwdice');
     console.log(G);
-    if (boardFields.fields[G.player[ctx.currentPlayer].index].action) {
-      boardFields.fields[G.player[ctx.currentPlayer].index].action({
-        ctx,
-        G,
-        moves,
-      });
+    console.lsog('index:' + G.player[ctx.currentPlayer].index);
+    console.log('phase:' + G.player[ctx.currentPlayer].phase);
+    if (
+      boardFields.fields[G.player[ctx.currentPlayer].index].phases[
+        G.player[ctx.currentPlayer].phase
+      ].action
+    ) {
+      console.log('calling action');
+      boardFields.fields[G.player[ctx.currentPlayer].index].phases[
+        G.player[ctx.currentPlayer].phase
+      ].action();
+    } else {
+      console.log('no action found');
     }
   };
   return (
@@ -28,7 +35,11 @@ export function Center(ctx, G, moves, boardFields) {
           {G.player[0].index})
         </div>
         <FieldBox
-          field={boardFields.fields[G.player[ctx.currentPlayer].index]}
+          field={
+            boardFields.fields[G.player[ctx.currentPlayer].index].phases[
+              G.player[ctx.currentPlayer].phase
+            ]
+          }
         />
       </div>
 
