@@ -11,7 +11,7 @@ import { BoardFields, size } from '../game/RowContent';
 
 export function MonopolyBoard({ ctx, G, moves }) {
   const gameParams = { ctx, G, moves };
-  let bf = new BoardFields(ctx,G,moves);
+  let bf = new BoardFields(ctx, G, moves);
 
   let current = 0;
   const bottomRight = bf.fields[current];
@@ -33,7 +33,7 @@ export function MonopolyBoard({ ctx, G, moves }) {
   return (
     <div className="table">
       <div className="board">
-        {Center(ctx,G, moves, bf)}
+        {Center(ctx, G, moves, bf)}
         {CornerSpace({ options: bottomRight })}
         {Row({
           ...gameParams,

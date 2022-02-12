@@ -1,5 +1,3 @@
-import { fields } from './game/RowContent';
-
 function IsVictory(cells) {
   return false;
 }
@@ -12,27 +10,27 @@ function IsDraw(cells) {
 export const Monopoly = {
   setup: (ctx, G) => ({
     player: {
-      0: { index: 0, state:{money: 0, child:0, work:"segely"}}
+      0: { index: 0, state: { money: 0, child: 0, work: 'segely' } },
     },
   }),
 
   moves: {
     throwDice: (G, ctx) => {
       G.dieRoll = ctx.random.D6();
-      G.dieRoll=1;
+      G.dieRoll = 1;
       G.player[ctx.currentPlayer].index += G.dieRoll;
     },
-    setPlayerState(G,ctx,nm,val){
-      console.log(nm);      
-      console.log("Setting "+nm+" state to "+ val);
+    setPlayerState(G, ctx, nm, val) {
+      console.log(nm);
+      console.log('Setting ' + nm + ' state to ' + val);
       G.player[ctx.currentPlayer].state[nm] = val;
     },
-    getPlayerState(G,ctx,nm){      
+    getPlayerState(G, ctx, nm) {
       return G.player[ctx.currentPlayer].state[nm];
     },
-    addMoney(G,ctx,amount){      
-      G.player[ctx.currentPlayer].state["money"]+=amount;
-    }
+    addMoney(G, ctx, amount) {
+      G.player[ctx.currentPlayer].state['money'] += amount;
+    },
   },
 
   turn: {
