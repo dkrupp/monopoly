@@ -1,48 +1,20 @@
 import './Center.css';
-//import { fields, size } from '../game/RowContent';
-import React, { Component } from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import React from 'react';
 
-//Choice component
-class Choices extends Component {
-  render() {
-    console.log(this.props.choices);
-    return this.props.choices.length > 0 ? (
-      <ButtonGroup
-        variant="contained"
-        aria-label="outlined primary button group"
-      >
-        {this.props.choices.map((question, index) => (
-          <Button key={index} onClick={question.action}>
-            {question.text}
-          </Button>
-        ))}
-      </ButtonGroup>
-    ) : null;
-  }
-}
+import { FieldBox } from './FieldBox.js';
 
-class FieldBox extends Component {
-  render() {
-    console.log(this.props.field.description);
-    console.log('fieldbox choices:');
-    console.log(this.props.field.choices);
-    return (
-      <div className="fieldBox">
-        <div className="fieldDescr">{this.props.field.description}</div>
-        <Choices choices={this.props.field.choices} />
-      </div>
-    );
-  }
-}
-
-export function Center(ctx, G, moves, bf) {
+export function Center(ctx, G, moves, boardFields) {
   const onClick = function ({ ctx, G, moves }) {
     moves.throwDice();
     console.log('throwdice');
     console.log(G);
-    bf.fields[G.player[ctx.currentPlayer].index].action();
+    if (boardFields.fields[G.player[ctx.currentPlayer].index].action) {
+      boardFields.fields[G.player[ctx.currentPlayer].index].action({
+        ctx,
+        G,
+        moves,
+      });
+    }
   };
   return (
     <div className="center">
@@ -52,9 +24,12 @@ export function Center(ctx, G, moves, bf) {
         </div>
         <div className="currentPlayer">Current Player: {ctx.currentPlayer}</div>
         <div className="currentPlayer">
-          Player 0: {bf.fields[G.player[0].index].name} ({G.player[0].index})
+          Player 0: {boardFields.fields[G.player[0].index].name} (
+          {G.player[0].index})
         </div>
-        <FieldBox field={bf.fields[G.player[ctx.currentPlayer].index]} />
+        <FieldBox
+          field={boardFields.fields[G.player[ctx.currentPlayer].index]}
+        />
       </div>
 
       <div className="chance-deck">

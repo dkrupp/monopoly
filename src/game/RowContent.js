@@ -15,7 +15,7 @@ export class BoardFields {
       type: 'go',
       name: 'GO',
       description: 'Hány gyermeket vállalsz?',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         console.log('Kezdoallapot. Segelyen vagy.');
         this.moves.setWorkType(CONSTANTS.workTypes.aid);
       },
@@ -61,7 +61,7 @@ export class BoardFields {
       name: 'Hétfő - Felvettek közmunkára',
       description:
         'Segély helyett hetente munkabért kap: (14.000 Ft/16.500 Ft/ 21.000 Ft/21.000 Ft).',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         console.log('Executing Hetfo action');
         this.moves.setWorkType(CONSTANTS.workTypes.community);
       },
@@ -73,7 +73,7 @@ export class BoardFields {
       name: 'Kedd - Építkezésen dolgozhatsz',
       description:
         '(Gyerekes közmunkás nem vállalhatja) „Feketén”: 30.000 Ft, legálisan: 15.000 Ft. Aki feketén dolgozik, annak fizetéskor dobnia kell: - ha 1-est dob: vissza kell fizetnie a segélyt (23.000 Ft-ot)',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         console.log('Executing Kedd action');
       },
       //fixme: nincs benne, hogy gyerekes kozmunkas nem vallalhatja
@@ -100,7 +100,7 @@ export class BoardFields {
       description:
         'Az édesanya teje elapadt a rossz életkörül- mények miatt. A tápszer ára egy hónapra: 11.000 Ft. (KÖTELEZŐ)',
       drawing: 'question',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         if (G.player[ctx.currentPlayer].state.children > 0) {
           moves.addMoney(-11000);
         }
@@ -112,7 +112,7 @@ export class BoardFields {
       name: 'Csütörtök - Megbüntetett a rendőr',
       description:
         'A büntetés összege (csekk): 10.000 Ft. A csekket, legkésőbb a hó végéig ki kell fizetni. Ha nem sikerül, a büntetés megduplázódik. Ha lefizeted a rendőrt 5.000 Ft-tal, nem ad csekket.',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         console.log('csutortok');
       },
       choices: [
@@ -133,7 +133,7 @@ export class BoardFields {
     {
       type: 'chance',
       name: 'Péntek - szerencsejáték',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         console.log('csutortok');
       },
       description:
@@ -147,7 +147,7 @@ export class BoardFields {
       description:
         'A postás pénzt hoz: - közmunkás heti bér: (14.000 Ft/16.500 Ft/ 21.000 Ft/21.000 Ft). - aki nem közmunkás, segélyt kap: (23.000 Ft)',
       instructions: 'Bért kapsz.',
-      action: (ctx, G, moves) => {
+      action: ({ ctx, G, moves }) => {
         console.log('HETVEGE');
       },
       //TODO: le kell fejleszteni a tobbfazisu mezot

@@ -2,5 +2,6 @@ module.exports = {
   extends: ['react-app', 'react-app/jest', 'prettier'],
   rules: {
     curly: 'error',
+    'prefer-const': 'error',
   },
 };
